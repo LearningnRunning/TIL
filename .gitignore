@@ -5,3 +5,6 @@ Data/auth.py
 Data/findAPT.ipynb
 Data/findAPT.ipynb
 Data/findAPT.ipynb
+*.json
+*.json
+*.json
