@@ -25,8 +25,7 @@ file_list = glob(os.path.join(NOW_PATH, STATIC_FILE_PATH, '*.csv'))
 
 
 df_dict = load_data(file_list)
-st.text(os.pwd())
-print('list(df_dict.keys())', list(df_dict.keys()))
+st.text('list(df_dict.keys())', list(df_dict.keys()))
 # 파일 선택 위젯 (파일 이름만 표시)
 selected_file_name = st.selectbox('CSV 파일을 선택하세요:', list(df_dict.keys()))
 if selected_file_name:
