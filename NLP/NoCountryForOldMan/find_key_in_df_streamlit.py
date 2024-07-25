@@ -1,0 +1,54 @@
+import streamlit as st
+import pandas as pd
+from glob import glob
+import os
+STATIC_FILE_PATH = './data/modulab_phase_2/review_dir'
+def find_rows(df, find_key):
+    result_df = df[df['SeparatedSentences'].str.contains(find_key, case=False, na=False)]
+    if not result_df.empty:
+        return result_df
+    else:
+        return pd.DataFrame()
+
+# Streamlit 앱 시작
+st.title('CSV 파일 검색 앱')
+
+file_list = glob(os.path.join(STATIC_FILE_PATH, '*.csv'))
+
+# 파일 이름만 추출
+file_names = [os.path.basename(file) for file in file_list]
+
+# 파일 이름과 경로를 매칭하는 딕셔너리 생성
+file_dict = {os.path.basename(file): file for file in file_list}
+
+# 파일 선택 위젯 (파일 이름만 표시)
+selected_file_name = st.selectbox('CSV 파일을 선택하세요:', file_names)
+
+# 선택된 파일의 전체 경로 가져오기
+selected_file_path = file_dict[selected_file_name]
+
+# 선택된 파일 불러오기
+@st.cache_data
+def load_data(filename):
+    return pd.read_csv(filename)
+
+df = load_data(selected_file_path)
+
+# 데이터프레임 표시
+st.write(f"선택된 파일: {selected_file_name}")
+st.dataframe(df.head())
+
+# 검색어 입력
+search_term = st.text_input('검색어를 입력하세요:')
+
+# 검색 버튼
+if st.button('검색'):
+    if search_term:
+        result = find_rows(df, search_term)
+        if not result.empty:
+            st.write('검색 결과:')
+            st.dataframe(result.loc[:,['SeparatedSentences']])
+        else:
+            st.write('검색 결과가 없습니다.')
+    else:
+        st.write('검색어를 입력해주세요.')
