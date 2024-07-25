@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from glob import glob
 import os
+NOW_PATH = os.getcwd()
 STATIC_FILE_PATH = './data/modulab_phase_2/review_dir'
 def find_rows(df, find_key):
     result_df = df[df['SeparatedSentences'].str.contains(find_key, case=False, na=False)]
@@ -20,10 +21,11 @@ def load_data(file_list):
 # Streamlit 앱 시작
 st.title('CSV 파일 검색 앱')
 
-file_list = glob(os.path.join(STATIC_FILE_PATH, '*.csv'))
+file_list = glob(os.path.join(NOW_PATH, STATIC_FILE_PATH, '*.csv'))
 
 
 df_dict = load_data(file_list)
+st.text(os.pwd())
 print('list(df_dict.keys())', list(df_dict.keys()))
 # 파일 선택 위젯 (파일 이름만 표시)
 selected_file_name = st.selectbox('CSV 파일을 선택하세요:', list(df_dict.keys()))
