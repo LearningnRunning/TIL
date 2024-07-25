@@ -2,6 +2,18 @@ import streamlit as st
 import pandas as pd
 from glob import glob
 import os
+
+current_directory = os.getcwd()
+print("현재 위치:", current_directory)
+
+print("\n현재 디렉토리의 파일 및 폴더 목록:")
+for item in os.listdir(current_directory):
+    item_path = os.path.join(current_directory, item)
+    if os.path.isfile(item_path):
+        print(f"파일: {item}")
+    elif os.path.isdir(item_path):
+        print(f"폴더: {item}")
+        
 NOW_PATH = os.getcwd()
 STATIC_DATA_PATH = 'data'
 def find_rows(df, find_key):
