@@ -3,7 +3,7 @@ import pandas as pd
 from glob import glob
 import os
 NOW_PATH = os.getcwd()
-STATIC_FILE_PATH = './data/modulab_phase_2/review_dir'
+STATIC_FILE_PATH = 'data/modulab_phase_2/review_dir'
 def find_rows(df, find_key):
     result_df = df[df['SeparatedSentences'].str.contains(find_key, case=False, na=False)]
     if not result_df.empty:
