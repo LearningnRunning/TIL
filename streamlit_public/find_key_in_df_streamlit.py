@@ -3,7 +3,7 @@ import pandas as pd
 from glob import glob
 import os
 NOW_PATH = os.getcwd()
-
+STATIC_DATA_PATH = 'data'
 def find_rows(df, find_key):
     result_df = df[df['SeparatedSentences'].str.contains(find_key, case=False, na=False)]
     if not result_df.empty:
@@ -21,7 +21,7 @@ def load_data(file_list):
 # Streamlit 앱 시작
 st.title('CSV 파일 검색 앱')
 
-file_list = glob(os.path.join(NOW_PATH, '*.csv'))
+file_list = glob(os.path.join(NOW_PATH, STATIC_DATA_PATH, '*.csv'))
 
 
 df_dict = load_data(file_list)
