@@ -5,6 +5,10 @@ Data/auth.py
 Data/findAPT.ipynb
 Data/findAPT.ipynb
 Data/findAPT.ipynb
-*.json
-*.json
-*.json
+Vision/data/election_commission/추천서 10장_230927_143314.pdf
+*.png
+*.jpeg
+Vision/
+/ELK
+/NLP/week4
+/coaching_study
